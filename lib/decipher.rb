@@ -1,5 +1,4 @@
 require './lib/english_library'
-require 'pry'
 
 class Decipher
   attr_reader :input_data, :line_one, :line_two, :line_three, :english_library
@@ -12,7 +11,6 @@ class Decipher
     @line_three = []
     @zipped = []
     @english_library = EnglishLibrary.new
-    binding.pry
   end
 
   def add_to_individual_lines
@@ -47,10 +45,3 @@ class Decipher
   end
 
 end
-
-  #
-  # input_data = File.read("./message1.txt").chomp
-  # decipher = Decipher.new(input_data)
-  # decipher.add_to_individual_lines
-  # decipher.convert_to_braille_characters
-  # decipher.translate_to_english

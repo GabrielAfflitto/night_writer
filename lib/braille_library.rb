@@ -1,5 +1,3 @@
-require 'pry'
-
 class BrailleLibrary
   attr_reader :braille_conversion
 
@@ -78,5 +76,3 @@ class BrailleLibrary
       }
   end
 end
-man = BrailleLibrary.new
-puts man.braille_conversion.invert
