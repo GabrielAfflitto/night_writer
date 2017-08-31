@@ -1,52 +1,33 @@
-require './lib/braille_library'
+require './lib/english_library'
 require 'pry'
 
 class Decipher
-  attr_reader :braille,
-              :braille_in,
-              :line_one,
-              :line_two,
-              :line_three,
-              :compiled_braille
+  attr_reader :input_data, :line_one, :line_two, :line_three, :english_library
 
-  def initialize(braille_in)
-    @braille_in = braille_in
-    @braille = BrailleLibrary.new
-    @line_one = ""
-    @line_two = ""
-    @line_three = ""
-    @compiled_braille = []
+  def initialize(input_data)
+    @input_data = input_data
+    @line_one = []
+    @line_two = []
+    @line_three = []
+    @english_library = EnglishLibrary.new
   end
 
-  def letters_to_text
-    translate_to_eng.join
-  end
-
-  def translate_to_eng
-    @compiled_braille.map do |character|
-      inverted_braille[character]
+  def add_to_individual_lines
+    split_data = input_data.split("\n")
+      until split_data.empty?
+      @line_one << split_data.shift
+      @line_two << split_data.shift
+      @line_three << split_data.shift
     end
   end
 
-  def inverted_braille
-    @braille.braille_conversion.invert
+  def convert_to_braille_characters
+    @line_one.to_s(/(..)/)
+    @line_two.to_s(/(..)/)
+    @line_three.to_s(/(..)/)
   end
-
-  def lower_case_conversion
-    characters = []
-    characters << @line_one.slice!(0..1)
-    characters << @line_two.slice!(0..1)
-    characters << @line_three.slice!(0..1)
-    @compiled_braille << characters
-  end
-
-  def upper_case_conversion
-    characters = []
-    characters << @line_one.slice!(0..3)
-    characters << @line_two.slice!(0..3)
-    characters << @line_three.slice!(0..3)
-    @compiled_braille << characters
-  end
-
 
 end
+
+  input_data = File.read("./message1.txt").chomp
+  decipher = Decipher.new(input_data)
