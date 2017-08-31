@@ -12,10 +12,14 @@ class Decipher
   def initialize(braille_in)
     @braille_in = braille_in
     @braille = BrailleLibrary.new
-    @line_one = line_one
-    @line_two = line_two
-    @line_three = line_three
-    @compiled_braille = ""
+    @line_one = ""
+    @line_two = ""
+    @line_three = ""
+    @compiled_braille = []
+  end
+
+  def letters_to_text
+    translate_to_eng.join
   end
 
   def translate_to_eng
@@ -36,5 +40,13 @@ class Decipher
     @compiled_braille << characters
   end
 
+  def upper_case_conversion
+    characters = []
+    characters << @line_one.slice!(0..3)
+    characters << @line_two.slice!(0..3)
+    characters << @line_three.slice!(0..3)
+    @compiled_braille << characters
+  end
+
+
 end
-binding.pry

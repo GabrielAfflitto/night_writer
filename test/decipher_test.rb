@@ -17,18 +17,20 @@ class DecipherTest < MiniTest::Test
   end
 
   def test_translate_to_english
-    skip
-    decipher = Decipher.new("braille_in")
+    input_data = File.read("./message1.txt").chomp
+    decipher = Decipher.new(input_data)
+    expected = "0.0.0.0.0....00.0.0.00\n" + "00.00.0..0..00.0000..0\n" + "....0.0.0....00.0.0..."
+    actual = decipher.braille_in
 
-    assert_equal
+    assert_equal expected, actual
   end
 
-  def test_lower_case_conversion
-    skip
-    decipher = Decipher.new("braille_in")
-
-    assert_equal , decipher.lower_case_conversion
-  end
+  # def test_lower_case_conversion
+  #   skip
+  #   decipher = Decipher.new("braille_in")
+  #
+  #   assert_equal , decipher.lower_case_conversion
+  # end
 
 
 end
