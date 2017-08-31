@@ -37,6 +37,8 @@ class Decipher
   end
 
   def translate_to_english
+    one = add_to_individual_lines
+    two = convert_to_braille_characters
     letters_as_characters = ""
     @zipped.each do |character|
       letters_as_characters << @english_library.english_conversion[character]
